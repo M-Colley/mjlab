@@ -41,6 +41,10 @@ Changed
 Fixed
 ^^^^^
 
+- Checkpoints are published atomically, preserving the previous complete file if
+  writing or replacement fails. Missing resume paths are resolved before allocating
+  the environment, and training exceptions now close the environment and logger.
+
 - Equality constraint reference data is now expanded per world during constant
   recomputation, so randomized joint defaults keep connect anchors and MuJoCo 3.17
   inferred weld poses independent across environments.
