@@ -21,6 +21,9 @@ Added
 Changed
 ^^^^^^^
 
+- The Viser viewer transfers and converts poses only for the selected world when
+  ``Hide others`` is enabled. Camera feeds reuse unchanged rendered frames instead
+  of repeatedly copying and encoding the same images on each viewer tick.
 - Heightfield terrains now lay hfield rows along y and columns along x, as MuJoCo
   expects. Non-square sub-terrains are no longer stretched with flat patches off the
   terrain; square ones are mirrored across x=y for a given seed.
@@ -41,6 +44,8 @@ Changed
 Fixed
 ^^^^^
 
+- Viser camera depth scale and frustum controls now refresh while paused. Depth
+  scaling reuses the last CPU depth image without copying or re-encoding other feeds.
 - Equality constraint reference data is now expanded per world during constant
   recomputation, so randomized joint defaults keep connect anchors and MuJoCo 3.17
   inferred weld poses independent across environments.
