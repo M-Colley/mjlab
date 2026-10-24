@@ -42,7 +42,8 @@ class RecomputeLevel(enum.IntEnum):
 
   set_const_0 = 2
   """Recompute ``dof_invweight0``, ``body_invweight0``, ``tendon_length0``,
-  ``tendon_invweight0``, ``actuator_acc0``, and ``eq_data``. Use after modifying
+  ``tendon_invweight0``, ``actuator_acc0``, ``eq_data``, and camera/light reference
+  poses. Use after modifying
   ``dof_armature``, ``body_inertia``, ``body_pos``, ``body_quat``, or ``qpos0``."""
 
   set_const = 3
@@ -60,6 +61,12 @@ _DERIVED_FIELDS: dict[RecomputeLevel, tuple[str, ...]] = {
     "tendon_invweight0",
     "actuator_acc0",
     "eq_data",
+    "cam_pos0",
+    "cam_poscom0",
+    "cam_mat0",
+    "light_pos0",
+    "light_poscom0",
+    "light_dir0",
   ),
 }
 _DERIVED_FIELDS[RecomputeLevel.set_const] = (
