@@ -72,6 +72,12 @@ with large batches, many randomized fields or long buffers. Shared options are
 stored once per frame. Capturing stops and the device buffer is released after
 a successful dump.
 
+As a representative memory budget, 512 Go1 worlds with body-mass randomization
+and its derived fields plus ``geom_friction`` used 739,404 bytes of tensor storage
+per frame on MuJoCo 3.17. A 100-frame buffer therefore projects to 70.5 MiB, plus
+35.5 MiB for the private native model and assets. This excludes allocator and
+Python overhead; sizes depend on the model and expanded fields.
+
 
 Output format
 -------------
