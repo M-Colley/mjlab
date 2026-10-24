@@ -411,7 +411,11 @@ def test_nan_guard_copies_latest_when_symlinks_are_unavailable(
 
   latest_dump = tmp_path / "nan_dump_latest.npz"
   latest_model = tmp_path / "model_latest.mjb"
-  assert attempts == [latest_dump, latest_model]
+  # Latest aliases are staged privately, then atomically replace the old path.
+  assert len(attempts) == 2
+  assert attempts[0].name.startswith(".model_latest.mjb.")
+  assert attempts[1].name.startswith(".nan_dump_latest.npz.")
+  assert all(not path.exists() for path in attempts)
   assert not latest_dump.is_symlink() and not latest_model.is_symlink()
   with np.load(latest_dump, allow_pickle=True) as dump:
     metadata = dump["_metadata"].item()
