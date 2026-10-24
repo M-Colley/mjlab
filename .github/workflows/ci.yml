@@ -1,24 +1,7 @@
 name: tests
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - '**.md'
-      - '**.rst'
-      - 'docs/**'
-      - 'Makefile'
-      - 'LICENSE'
-      - 'scripts/benchmarks/**'
-  pull_request:
-    branches: [main]
-    paths-ignore:
-      - '**.md'
-      - '**.rst'
-      - 'docs/**'
-      - 'Makefile'
-      - 'LICENSE'
-      - 'scripts/benchmarks/**'
+  workflow_dispatch:
 
 env:
   UV_FROZEN: "1"
