@@ -237,10 +237,13 @@ def test_old_dump_without_model_revisions_remains_readable(tmp_path):
   np.savez(
     path,
     states_step_000000=state[None],
-    _metadata={
-      "model_file": "old.mjb",
-      "state_spec": spec,
-    },
+    _metadata=np.array(
+      {
+        "model_file": "old.mjb",
+        "state_spec": spec,
+      },
+      dtype=object,
+    ),
   )
   restored_model, restored_data = NanDump(path).restore(0, 0, forward=True)
   assert restored_model.body_mass[1] == 5

@@ -1,4 +1,4 @@
-"""Lightweight NaN guard for capturing simulation states when NaN/Inf detected."""
+"""Capture per-world model and integration-state history when NaN/Inf is detected."""
 
 import enum
 import errno
@@ -313,9 +313,10 @@ class NanGuard:
           binary = np.empty(mujoco.mj_sizeModel(native_model), dtype=np.uint8)
           mujoco.mj_saveModel(native_model, None, binary)
           _atomic_save(
-            self.output_dir / name, lambda stream, binary=binary: stream.write(binary)
+            self.output_dir / name,
+            lambda stream, binary=binary: stream.write(binary.data),
           )
-          model_hashes[name] = hashlib.sha256(binary).hexdigest()
+          model_hashes[name] = hashlib.sha256(binary.data).hexdigest()
           backend_options[name] = {
             key: value.tolist() for key, value in option_groups["warp_options"].items()
           }
