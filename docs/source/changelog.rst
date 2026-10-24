@@ -48,6 +48,10 @@ Changed
 Fixed
 ^^^^^
 
+- Checkpoints are published atomically, preserving the previous complete file if
+  writing or replacement fails. Missing resume paths are resolved before allocating
+  the environment, and training exceptions now close the environment and logger.
+
 - Camera and light reference poses are now expanded per world before constant
   recomputation, preserving independent references after domain randomization.
 
