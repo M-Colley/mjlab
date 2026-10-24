@@ -1308,9 +1308,15 @@ MuJoCo Warp 3.16.0 and 3.17.0 derive tracking references from their previous val
 .. note::
 
    mjlab captures ``sim.step()``, ``sim.forward()``, ``sim.reset()``, and
-   ``sim.sense()`` as individual CUDA graphs for performance. All event
-   manager logic, including ``recompute_constants``, runs as regular
-   Python between these graph replays, so it will not break graph capture.
+   ``sim.sense()`` as individual CUDA graphs for performance. Constant
+   recomputation captures a separate graph lazily for each level and replays it
+   using the current array values. CPU execution uses the regular function.
+   Event manager logic runs between graph replays.
+
+   Replacing model or data storage requires ``sim.create_graph()``, which also
+   invalidates cached recomputation graphs. Call it after changing host-side
+   options that select different kernels. Repeating an unchanged
+   ``expand_model_fields()`` request preserves existing graphs and sensor contexts.
 
    That said, ``set_const`` is expensive: it runs forward kinematics, the
    composite rigid body algorithm, and mass matrix factorization across all
