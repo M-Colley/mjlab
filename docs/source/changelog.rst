@@ -53,6 +53,10 @@ Fixed
 
 - Viser camera depth scale and frustum controls now refresh while paused. Depth
   scaling reuses the last CPU depth image without copying or re-encoding other feeds.
+- NaN dumps now preserve each frame/world's randomized model, mesh assignment,
+  simulation options and full integration inputs. Replay selects the matching
+  model revision, while older single-model dumps remain readable. Concurrent
+  guards publish unique archives atomically and serialize latest-alias updates.
 - Equality constraint reference data is now expanded per world during constant
   recomputation, so randomized joint defaults keep connect anchors and MuJoCo 3.17
   inferred weld poses independent across environments.
