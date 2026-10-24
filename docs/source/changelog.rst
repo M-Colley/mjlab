@@ -53,6 +53,11 @@ Fixed
   pending refreshes, avoiding blocked ticks while a background update is running.
 - Camera and light reference poses are now expanded per world before constant
   recomputation, preserving independent references after domain randomization.
+- NaN dumps now preserve each frame/world's randomized model, mesh assignment,
+  simulation options and full integration inputs. Replay selects the matching
+  model revision, while older single-model dumps remain readable. Concurrent
+  guards publish unique archives atomically and serialize latest-alias updates,
+  with copies when symlink privileges are unavailable.
 - ``posture`` and ``variable_posture`` now pair each joint with its own ``std`` when
   ``asset_cfg.preserve_order=True``.
 - ``apply_body_impulse`` now applies ``body_point_offset`` in the body frame, as
