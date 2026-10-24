@@ -133,6 +133,7 @@ class ViserCameraViewer:
     return (
       self.needs_update
       or env_idx != self._last_env_idx
+      or self._last_scene_offset is None
       or not np.array_equal(scene_offset, self._last_scene_offset)
     )
 
@@ -228,6 +229,7 @@ class ViserCameraViewer:
     if (
       new_frame
       or frustum_revision != self._last_frustum_revision
+      or self._last_scene_offset is None
       or not np.array_equal(scene_offset, self._last_scene_offset)
     ):
       self._update_frustum(sim_data, env_idx, scene_offset)
