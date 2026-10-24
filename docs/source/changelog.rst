@@ -48,6 +48,8 @@ Fixed
   scaling reuses the last CPU depth image without copying or re-encoding other feeds.
 - The Viser play viewer keeps at most one scene update in flight and coalesces
   pending refreshes, avoiding blocked ticks while a background update is running.
+- Camera and light reference poses are now expanded per world before constant
+  recomputation, preserving independent references after domain randomization.
 - ``posture`` and ``variable_posture`` now pair each joint with its own ``std`` when
   ``asset_cfg.preserve_order=True``.
 - ``apply_body_impulse`` now applies ``body_point_offset`` in the body frame, as
