@@ -380,7 +380,11 @@ class ViserPlayViewer(BaseViewer):
     """Push camera sensor frames to GUI when needed."""
     t0 = time.perf_counter()
     if self._camera_overlays and self._should_update_cameras(
-      self._is_paused, has_pending_updates
+      self._is_paused,
+      has_pending_updates
+      or self._camera_overlays.needs_update_for(
+        self._scene.env_idx, self._scene._scene_offset
+      ),
     ):
       self._camera_overlays.update(
         sim.data, self._scene.env_idx, self._scene._scene_offset
