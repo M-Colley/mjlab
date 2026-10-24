@@ -41,6 +41,9 @@ Changed
 Fixed
 ^^^^^
 
+- Camera and light reference poses are now expanded per world before constant
+  recomputation, preserving independent references after domain randomization.
+
 - Equality constraint reference data is now expanded per world during constant
   recomputation, so randomized joint defaults keep connect anchors and MuJoCo 3.17
   inferred weld poses independent across environments.
